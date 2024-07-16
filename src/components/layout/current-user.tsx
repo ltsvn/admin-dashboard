@@ -6,11 +6,12 @@ import { SettingOutlined } from "@ant-design/icons";
 import { Button, Popover } from "antd";
 
 import type { User } from "@/graphql/schema.types";
-import CustomAvatar from "@/components/custom-avatar";
 // import { AccountSettings } from "../account-settings";
+import { CustomAvatar } from "@/components/custom-avatar";
 import { Text } from "@/components/text";
+import { AccountSettings } from "@/components/layout/account-settings";
 
-export const CurrentUser = () => {
+const CurrentUser = () => {
   const [opened, setOpened] = React.useState(false);
   const { data: user } = useGetIdentity<User>();
 
@@ -67,13 +68,15 @@ export const CurrentUser = () => {
           style={{ cursor: "pointer" }}
         />
       </Popover>
-      {/*{user && (*/}
-      {/*    <AccountSettings*/}
-      {/*        opened={opened}*/}
-      {/*        setOpened={setOpened}*/}
-      {/*        userId={user.id}*/}
-      {/*    />*/}
-      {/*)}*/}
+      {user && (
+        <AccountSettings
+          opened={opened}
+          setOpened={setOpened}
+          userId={user.id}
+        />
+      )}
     </>
   );
 };
+
+export default CurrentUser;
